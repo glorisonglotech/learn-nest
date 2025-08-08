@@ -1,0 +1,45 @@
+# Node modules
+node_modules/
+
+# Logs
+logs
+*.log
+npm-debug.log*
+
+# Runtime data
+pids
+*.pid
+*.seed
+
+# Coverage reports
+coverage/
+.nyc_output/
+
+# Build output
+build/
+dist/
+
+# Environment variables
+.env
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# IDE/editor folders
+.vscode/
+.idea/
+
+# Optional npm cache
+.npm/
+
+# REPL history
+.node_repl_history
+
+# Frontend build artifacts
+client/build/
+client/dist/
+
+# Backend build artifacts
+server/build/
+server/dist/
