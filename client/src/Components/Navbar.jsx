@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 function Navbar() {
   return (
@@ -7,16 +8,18 @@ function Navbar() {
       <div className="flex gap-10 items-center">
         {/* nav for Desktop view */}
         <ul className="flex gap-5">
-          <li>Dashboard</li>
-          <li>courses</li>
-          <li>Users</li>
-          <li>Assessments</li>
-          <li>Progress</li>
-          <li>communication</li>
+          <Link to="/">Dashboard</Link>
+          <Link to="/courses">Courses</Link>
+          <Link to="/users">USers</Link>
+          <Link to="/assessments">Assessments</Link>
+          <Link to="/progress">Progress</Link>
+          <Link to="/communication">Communication</Link>
         </ul>
-        <div className="flex  ">
-          <button className=" mx-4 w-20  rounded p-2 bg-blue-700">Login</button>
-          <button>Sign up</button>
+        <div className="flex">
+          <Link to="/login" className="  bg-blue-700">
+            Login
+          </Link>
+          <Link to="/signup">Sign up</Link>
         </div>
       </div>
     </div>
