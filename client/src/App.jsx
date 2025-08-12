@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import Navbar from "./Components/Navbar";
 import Footer from "./Components/Footer";
@@ -11,20 +11,30 @@ import Progress from "./Pages/Progress";
 import Communication from "./Pages/Communication";
 import Login from "./Pages/Login";
 import SignUp from "./Pages/SignUp";
-import AboutUs from "./Pages/Sub-pages/Company/AboutUs"
-import Blog from './Pages/Sub-pages/Company/Blog'
-import Privacy from "./pages/Sub-pages/Company/Privacy"
-import Terms from "./pages/Sub-pages/Company/Terms"
+import AboutUs from "./Pages/Sub-pages/Company/AboutUs";
+import Blog from "./Pages/Sub-pages/Company/Blog";
+import Privacy from "./pages/Sub-pages/Company/Privacy";
+import Terms from "./pages/Sub-pages/Company/Terms";
 // import ContactUs from  "./pages/Sub-pages/Supports/ContactUs"
 import ContactUs from "./Pages/Sub-pages/Supports/ContactUs";
 import Documentation from "./Pages/Sub-pages/Supports/Documentation";
 import HelpCenter from "./Pages/Sub-pages/Supports/HelpCenter";
-import SystemStatus from "./pages/Sub-pages/Supports/SystemStatus"
+import SystemStatus from "./pages/Sub-pages/Supports/SystemStatus";
 const App = () => {
+  // const [isLoginOpen, setIsLoginOpen] = useState(false);
+  const [isLoginOpen, setIsLoginOpen] = useState(false);
+  const [isSignUpOpen, setIsSignUpOpen] = useState(false);
+
   return (
     <Router>
       <div className="md:w-[90%] md:mx-auto">
-        <Navbar />
+        {/* <Navbar />
+         */}
+        <Navbar
+          onLoginClick={() => setIsLoginOpen(true)}
+          onSignUpClick={() => setIsSignUpOpen(true)}
+        />
+
         <Routes>
           <Route path="/" element={<Dashboard />} />
           <Route path="/Courses" element={<Courses />} />
@@ -37,16 +47,29 @@ const App = () => {
 
           {/* Sub pages that are in the footer */}
           {/* Supports */}
-          <Route path="/aboutUs" element={<AboutUs />}/>
-          <Route path="/Blog" element={<Blog />}/>
-          <Route path="/Privacy" element={<Privacy />}/>
-          <Route path="/terms" element={<Terms />}/>
-          <Route path="/ContactUS" element={<ContactUs />}/>
-          <Route path="/documentation" element={<Documentation />}/>
-          <Route path="/helpcenter" element={<HelpCenter />}/>
-          <Route path="systemstatus" element={<SystemStatus />}/>
+          <Route path="/aboutUs" element={<AboutUs />} />
+          <Route path="/Blog" element={<Blog />} />
+          <Route path="/Privacy" element={<Privacy />} />
+          <Route path="/terms" element={<Terms />} />
+          <Route path="/ContactUS" element={<ContactUs />} />
+          <Route path="/documentation" element={<Documentation />} />
+          <Route path="/helpcenter" element={<HelpCenter />} />
+          <Route path="systemstatus" element={<SystemStatus />} />
         </Routes>
         <Footer />
+        {/* Login Modal */}
+        {isLoginOpen && (
+          <Login isOpen={isLoginOpen} onClose={() => setIsLoginOpen(false)}  onSignUpClick={() => setIsSignUpOpen(true)} />
+        )}
+
+        {/* SignUp Modal */}
+        {isSignUpOpen && (
+          <SignUp
+            isOpen={isSignUpOpen}
+            onClose={() => setIsSignUpOpen(false)}
+             onLoginClick={() => setIsLoginOpen(true)}
+          />
+        )}
       </div>
     </Router>
   );
