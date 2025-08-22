@@ -3,7 +3,6 @@ import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import Navbar from "./Components/Navbar";
 import Footer from "./Components/Footer";
 import Dashboard from "./Pages/Dashboard";
-
 import Courses from "./Pages/Courses";
 import Users from "./Pages/Users";
 import Assessments from "./Pages/Assessment";
@@ -15,13 +14,11 @@ import AboutUs from "./Pages/Sub-pages/Company/AboutUs";
 import Blog from "./Pages/Sub-pages/Company/Blog";
 import Privacy from "./pages/Sub-pages/Company/Privacy";
 import Terms from "./pages/Sub-pages/Company/Terms";
-// import ContactUs from  "./pages/Sub-pages/Supports/ContactUs"
 import ContactUs from "./Pages/Sub-pages/Supports/ContactUs";
 import Documentation from "./Pages/Sub-pages/Supports/Documentation";
 import HelpCenter from "./Pages/Sub-pages/Supports/HelpCenter";
 import SystemStatus from "./pages/Sub-pages/Supports/SystemStatus";
 const App = () => {
-  // const [isLoginOpen, setIsLoginOpen] = useState(false);
   const [isLoginOpen, setIsLoginOpen] = useState(false);
   const [isSignUpOpen, setIsSignUpOpen] = useState(false);
 
