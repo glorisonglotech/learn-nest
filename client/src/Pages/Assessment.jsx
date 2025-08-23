@@ -9,7 +9,7 @@ function Assessment() {
           Manage your assessments, quizzes, and assignments effectively.
         </p>
       </div>
-      <div className=" w-[20%] bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 justify-center items-center flex mb-6 ">
+      <div className="md:w-[20%] bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 justify-center items-center flex mb-6 ">
         <button className="">+ Create Assessments</button>
       </div>
     </section>

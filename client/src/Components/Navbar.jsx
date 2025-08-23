@@ -8,7 +8,7 @@ function Navbar({ onLoginClick, onSignUpClick }) {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <div className="border flex justify-between p-3 items-center">
+    <div className="flex justify-between p-3 items-center">
       {/* Logo */}
       <div>Logo</div>
 

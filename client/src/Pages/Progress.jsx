@@ -3,7 +3,7 @@ import React from "react";
 function Progress() {
   return (
     <section className="p-6">
-      <div>
+      <div  className="flex justify-between items-center mb-6">
         <h1>My Learning Progress</h1>
         {/* drop down */}
         <button></button>
@@ -12,7 +12,7 @@ function Progress() {
 
       <div className="flex flex-col gap-10 border p-4">
         <div>
-          <h1 className="text-2xl">Overall progress</h1>
+          <h2 className="text-2xl">Overall progress</h2>
         </div>
         <div className="flex flex-col justify-center items-center gap-5">
           <div className="flex flex-col justify-center items-center">
@@ -48,14 +48,14 @@ function Progress() {
       {/* course progress */}
       <div className="border my-10 p-4">
         <h2>Course Progress</h2>
-        <div className=" flex flex-col gap-10">
+        <div className=" flex flex-col gap-10 ">
           <div className="flex justify-between items-center ">
             <div></div>
             <div className="bg-green-500 px-7 rounded-2xl">0% completed</div>
           </div>
           <dix>
             {" "}
-            <div className="flex justify-between">
+            <div className="flex justify-between mb-4">
               <p>progress</p>
               <p>0 of 0 lesson </p>
             </div>
@@ -79,7 +79,7 @@ function Progress() {
       {/* Recent achivemenst  */}
       <div className="border p-4">
         <h2>Recent Achievements</h2>
-        <div className="bg-green-600 p-5 rounded-3xl"></div>
+        <div className="bg-green-600 p-2 rounded-2xl">✔</div>
       </div>
 
       {/* Assements grades  */}

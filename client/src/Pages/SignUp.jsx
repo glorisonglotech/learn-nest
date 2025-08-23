@@ -1,7 +1,14 @@
 
-import React from "react";
+import React, { useEffect } from "react";
 
 function SignUp({ isOpen, onClose,onLoginClick }) {
+    useEffect(() => {
+      if (isOpen) {
+        document.body.style.overflow ="hidden"
+      }else{
+        document.body.style.overflow ="auto"
+      }
+    });
   if (!isOpen) return null;
     const switchToLogin = () => {
     onClose(); // close login modal
