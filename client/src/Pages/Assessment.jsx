@@ -2,7 +2,7 @@ import React from "react";
 
 function Assessment() {
   return (
-    <section className="md:flex md:flex-row md:items-center p-6 justify-between h-[70vh]">
+    <section className="md:flex border md:flex-row md:items-center p-6 justify-between h-[70vh]">
       <div>
         <h1 className="text-3xl font-bold mb-4">Assessment Managements</h1>
         <p className="text-gray-600 mb-6">
