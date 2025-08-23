@@ -12,7 +12,7 @@ function UserSearchForm() {
   };
 
   return (
-    <div className="bg-blue-50 p-4 rounded-lg max-w-2xl">
+    <div className=" p-4 rounded-lg w-[100%] border">
       {/* Search Users */}
       <label className="block font-medium mb-1">Search Users</label>
       <input
@@ -50,16 +50,16 @@ function UserSearchForm() {
 
 export default function Users() {
   return (
-    <div className="p-6">
+    <div className="p-4">
       {/* Header */}
-      <div className="flex justify-between items-center mb-6">
+      <div className="md:flex justify-between items-center mb-6 ">
         <div>
           <h1 className="text-3xl font-bold mb-1">User Management</h1>
           <p className="text-gray-600">
             Manage user accounts, roles, and permissions for your learning platform.
           </p>
         </div>
-        <button className="bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-lg flex items-center gap-2">
+        <button className="bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-lg flex items-center gap-2 mt-5">
           <FontAwesomeIcon icon={faPlus} />
           Add New User
         </button>

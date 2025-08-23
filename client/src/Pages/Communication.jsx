@@ -9,9 +9,9 @@ function Communication() {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {/* Messages Section */}
         <div className="bg-white p-4 rounded-lg shadow border">
-          <div className="flex justify-between items-center">
+          <div className="md:flex justify-between items-center">
             <h2 className="text-lg font-medium">Messages</h2>
-            <button className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600">
+            <button className="bg-blue-500 text-white px-4 mt-4 py-2 rounded-lg hover:bg-blue-600">
               Compose Message
             </button>
           </div>
@@ -19,9 +19,9 @@ function Communication() {
 
         {/* Forum Discussions Section */}
         <div className="bg-white p-4 rounded-lg shadow border">
-          <div className="flex justify-between items-center">
+          <div className="md:flex justify-between items-center">
             <h2 className="text-lg font-medium">Forum Discussions</h2>
-            <button className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600">
+            <button className="bg-blue-500 text-white px-4 mt-4 py-2 rounded-lg hover:bg-blue-600">
               New Discussion
             </button>
           </div>
