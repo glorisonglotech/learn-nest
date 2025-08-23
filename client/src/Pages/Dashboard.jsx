@@ -8,14 +8,13 @@ function Dashboard() {
     } else {
       document.body.style.overflow = "auto";
     }
-  });
+  }, [create]);
   const onCreate = () => {
-    setCreate(!create);
-    console.log(create);
+    setCreate((prev) => !prev); // ✅ safer toggle
   };
   return (
     <main className="p-4">
-      <section className="mt-10">
+      <section className="">
         <h1 className="">Dashboard</h1>
         <p>Welcome Back! Here an overview of your courses and activities</p>
         {/* cards */}
@@ -30,10 +29,13 @@ function Dashboard() {
             {/* Create form */}
             {create && (
               <div
-                className="fixed inset-0 bg-gray-200/25 bg-opacity-50 flex justify-center items-center z-50"
+                className="fixed inset-0 bg-gray-500/25 bg-opacity-50 flex justify-center  items-center z-50"
                 onClick={onCreate}
               >
-                <div className="bg-white p-6 rounded-lg w-[50%] shadow-lg">
+                <div
+                  className="bg-white p-6 rounded-lg md:w-[50%] shadow-lg"
+                  onClick={(e) => e.stopPropagation()}
+                >
                   <h1 className="text-xl font-bold mb-4">Create New Course</h1>
 
                   <div className="mb-3">
@@ -106,6 +108,7 @@ function Dashboard() {
                 <p>Intro to artificial intelliegnce</p>
                 <p>By</p>
               </li>
+              bg-blue-50
               <li className="bg-blue-50 p-5">
                 <div className="flex justify-between">
                   <h2>AI WorkShop Thoughts</h2>

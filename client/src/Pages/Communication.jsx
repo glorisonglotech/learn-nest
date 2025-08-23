@@ -2,7 +2,7 @@ import React from "react";
 
 function Communication() {
   return (
-    <div className="p-6 bg-gray-50 min-h-screen">
+    <div className="p-6 min-h-screen">
       {/* Page Title */}
       <h1 className="text-2xl font-semibold mb-6">Communication Hub</h1>
 
@@ -59,7 +59,7 @@ function Communication() {
 
       {/* Course Announcements */}
       <div className="bg-white p-4 rounded-lg shadow border mt-6">
-        <div className="flex justify-between items-center">
+        <div className="md:flex justify-between items-center">
           <h2 className="text-lg font-medium">Course Announcements</h2>
           <button className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600">
             New Announcement
