@@ -32,8 +32,9 @@ const App = () => {
           <Navbar
             onLoginClick={() => setIsLoginOpen(true)}
             onSignUpClick={() => setIsSignUpOpen(true)}
-            isAuth={isAuth}
+            isAuth={isAuth}   {/* ✅ keep from Frontend */}
           />
+
           <Routes>
             <Route path="/" element={<Dashboard />} />
             <Route path="/Courses" element={<Courses />} />

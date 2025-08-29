@@ -7,6 +7,7 @@ function Navbar({ onLoginClick, onSignUpClick, isAuth }) {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
+
     <div className=" flex justify-between p-5 items-center   bg-blue-50">
       {/* Logo */}
       <div>Logo</div>
@@ -20,6 +21,7 @@ function Navbar({ onLoginClick, onSignUpClick, isAuth }) {
           <Link to="/communication">Communication</Link>
         </ul>
       )}
+
 
       {/* Right Side (Desktop) */}
       <div className="hidden md:flex gap-3">
