@@ -18,56 +18,64 @@ import ContactUs from "./Pages/Sub-pages/Supports/ContactUs";
 import Documentation from "./Pages/Sub-pages/Supports/Documentation";
 import HelpCenter from "./Pages/Sub-pages/Supports/HelpCenter";
 import SystemStatus from "./pages/Sub-pages/Supports/SystemStatus";
+import LandingPage from "./Pages/LandingPage";
 const App = () => {
   const [isLoginOpen, setIsLoginOpen] = useState(false);
   const [isSignUpOpen, setIsSignUpOpen] = useState(false);
+  const [isAuth, setISauth] = useState(false);
 
   return (
     <Router>
-      <div className="md:w-[90%] md:mx-auto">
-        {/* <Navbar />
-         */}
-        <Navbar
-          onLoginClick={() => setIsLoginOpen(true)}
-          onSignUpClick={() => setIsSignUpOpen(true)}
-        />
-
-        <Routes>
-          <Route path="/" element={<Dashboard />} />
-          <Route path="/Courses" element={<Courses />} />
-          <Route path="/Users" element={<Users />} />
-          <Route path="/Assessments" element={<Assessments />} />
-          <Route path="/Progress" element={<Progress />} />
-          <Route path="/Communication" element={<Communication />} />
-          <Route path="/Login" element={<Login />} />
-          <Route path="/Signup" element={<SignUp />} />
-
-          {/* Sub pages that are in the footer */}
-          {/* Supports */}
-          <Route path="/aboutUs" element={<AboutUs />} />
-          <Route path="/Blog" element={<Blog />} />
-          <Route path="/Privacy" element={<Privacy />} />
-          <Route path="/terms" element={<Terms />} />
-          <Route path="/ContactUS" element={<ContactUs />} />
-          <Route path="/documentation" element={<Documentation />} />
-          <Route path="/helpcenter" element={<HelpCenter />} />
-          <Route path="systemstatus" element={<SystemStatus />} />
-        </Routes>
-        <Footer />
-        {/* Login Modal */}
-        {isLoginOpen && (
-          <Login isOpen={isLoginOpen} onClose={() => setIsLoginOpen(false)}  onSignUpClick={() => setIsSignUpOpen(true)} />
-        )}
-
-        {/* SignUp Modal */}
-        {isSignUpOpen && (
-          <SignUp
-            isOpen={isSignUpOpen}
-            onClose={() => setIsSignUpOpen(false)}
-             onLoginClick={() => setIsLoginOpen(true)}
+      {isAuth ? (
+        <div className="md:w-[100%] md:mx-auto ">
+          <Navbar
+            onLoginClick={() => setIsLoginOpen(true)}
+            onSignUpClick={() => setIsSignUpOpen(true)}
           />
-        )}
-      </div>
+
+          <Routes>
+            <Route path="/" element={<Dashboard />} />
+            <Route path="/Courses" element={<Courses />} />
+            <Route path="/Users" element={<Users />} />
+            <Route path="/Assessments" element={<Assessments />} />
+            <Route path="/Progress" element={<Progress />} />
+            <Route path="/Communication" element={<Communication />} />
+            <Route path="/Login" element={<Login />} />
+            <Route path="/Signup" element={<SignUp />} />
+
+            {/* Sub pages that are in the footer */}
+            {/* Supports */}
+            <Route path="/aboutUs" element={<AboutUs />} />
+            <Route path="/Blog" element={<Blog />} />
+            <Route path="/Privacy" element={<Privacy />} />
+            <Route path="/terms" element={<Terms />} />
+            <Route path="/ContactUS" element={<ContactUs />} />
+            <Route path="/documentation" element={<Documentation />} />
+            <Route path="/helpcenter" element={<HelpCenter />} />
+            <Route path="systemstatus" element={<SystemStatus />} />
+          </Routes>
+          <Footer />
+          {/* Login Modal */}
+          {isLoginOpen && (
+            <Login
+              isOpen={isLoginOpen}
+              onClose={() => setIsLoginOpen(false)}
+              onSignUpClick={() => setIsSignUpOpen(true)}
+            />
+          )}
+
+          {/* SignUp Modal */}
+          {isSignUpOpen && (
+            <SignUp
+              isOpen={isSignUpOpen}
+              onClose={() => setIsSignUpOpen(false)}
+              onLoginClick={() => setIsLoginOpen(true)}
+            />
+          )}
+        </div>
+      ) : (
+       <LandingPage />
+      )}
     </Router>
   );
 };
