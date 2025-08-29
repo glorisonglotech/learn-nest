@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Navbar from "./Components/Navbar";
 import Footer from "./Components/Footer";
 import Dashboard from "./Pages/Dashboard";
@@ -19,6 +19,7 @@ import Documentation from "./Pages/Sub-pages/Supports/Documentation";
 import HelpCenter from "./Pages/Sub-pages/Supports/HelpCenter";
 import SystemStatus from "./pages/Sub-pages/Supports/SystemStatus";
 import LandingPage from "./Pages/LandingPage";
+
 const App = () => {
   const [isLoginOpen, setIsLoginOpen] = useState(false);
   const [isSignUpOpen, setIsSignUpOpen] = useState(false);
@@ -31,8 +32,8 @@ const App = () => {
           <Navbar
             onLoginClick={() => setIsLoginOpen(true)}
             onSignUpClick={() => setIsSignUpOpen(true)}
+            isAuth={isAuth}
           />
-
           <Routes>
             <Route path="/" element={<Dashboard />} />
             <Route path="/Courses" element={<Courses />} />
@@ -43,8 +44,7 @@ const App = () => {
             <Route path="/Login" element={<Login />} />
             <Route path="/Signup" element={<SignUp />} />
 
-            {/* Sub pages that are in the footer */}
-            {/* Supports */}
+            {/* Sub pages */}
             <Route path="/aboutUs" element={<AboutUs />} />
             <Route path="/Blog" element={<Blog />} />
             <Route path="/Privacy" element={<Privacy />} />
@@ -54,27 +54,37 @@ const App = () => {
             <Route path="/helpcenter" element={<HelpCenter />} />
             <Route path="systemstatus" element={<SystemStatus />} />
           </Routes>
-          <Footer />
-          {/* Login Modal */}
-          {isLoginOpen && (
-            <Login
-              isOpen={isLoginOpen}
-              onClose={() => setIsLoginOpen(false)}
-              onSignUpClick={() => setIsSignUpOpen(true)}
-            />
-          )}
 
-          {/* SignUp Modal */}
-          {isSignUpOpen && (
-            <SignUp
-              isOpen={isSignUpOpen}
-              onClose={() => setIsSignUpOpen(false)}
-              onLoginClick={() => setIsLoginOpen(true)}
-            />
-          )}
+          <Footer />
         </div>
       ) : (
-       <LandingPage />
+        <LandingPage
+          onLoginClick={() => setIsLoginOpen(true)}
+          onSignUpClick={() => setIsSignUpOpen(true)}
+        />
+      )}
+
+      {/* 🔹 Render modals globally so they work in both LandingPage & Dashboard */}
+      {isLoginOpen && (
+        <Login
+          isOpen={isLoginOpen}
+          onClose={() => setIsLoginOpen(false)}
+          onSignUpClick={() => {
+            setIsLoginOpen(false);
+            setIsSignUpOpen(true);
+          }}
+        />
+      )}
+
+      {isSignUpOpen && (
+        <SignUp
+          isOpen={isSignUpOpen}
+          onClose={() => setIsSignUpOpen(false)}
+          onLoginClick={() => {
+            setIsSignUpOpen(false);
+            setIsLoginOpen(true);
+          }}
+        />
       )}
     </Router>
   );

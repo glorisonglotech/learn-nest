@@ -108,7 +108,7 @@ function Dashboard() {
                 <p>Intro to artificial intelliegnce</p>
                 <p>By</p>
               </li>
-              bg-blue-50
+             
               <li className="bg-blue-50 p-5">
                 <div className="flex justify-between">
                   <h2>AI WorkShop Thoughts</h2>

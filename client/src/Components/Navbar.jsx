@@ -2,25 +2,24 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars, faTimes } from "@fortawesome/free-solid-svg-icons";
-// import Login from "../Pages/Login";
 
-function Navbar({ onLoginClick, onSignUpClick }) {
+function Navbar({ onLoginClick, onSignUpClick, isAuth }) {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <div className=" flex justify-between p-3 items-center mb-3  bg-blue-50">
+    <div className=" flex justify-between p-5 items-center   bg-blue-50">
       {/* Logo */}
       <div>Logo</div>
-
-      {/* Desktop Nav */}
-      <ul className=" md:flex gap-5 hidden items-center">
-        <Link to="/">Dashboard</Link>
-        <Link to="/courses">Courses</Link>
-        <Link to="/users">Users</Link>
-        <Link to="/assessments">Assessments</Link>
-        <Link to="/progress">Progress</Link>
-        <Link to="/communication">Communication</Link>
-      </ul>
+      {isAuth && (
+        <ul className=" md:flex gap-5 hidden items-center">
+          <Link to="/">Dashboard</Link>
+          <Link to="/courses">Courses</Link>
+          <Link to="/users">Users</Link>
+          <Link to="/assessments">Assessments</Link>
+          <Link to="/progress">Progress</Link>
+          <Link to="/communication">Communication</Link>
+        </ul>
+      )}
 
       {/* Right Side (Desktop) */}
       <div className="hidden md:flex gap-3">
@@ -49,31 +48,36 @@ function Navbar({ onLoginClick, onSignUpClick }) {
       {/* Mobile Menu */}
       {isOpen && (
         <div className="absolute top-16 left-0 w-full bg-white shadow-lg md:hidden p-4">
-          <ul className="flex flex-col gap-4">
-            <Link to="/" onClick={() => setIsOpen(false)}>
-              Dashboard
-            </Link>
-            <Link to="/courses" onClick={() => setIsOpen(false)}>
-              Courses
-            </Link>
-            <Link to="/users" onClick={() => setIsOpen(false)}>
-              Users
-            </Link>
-            <Link to="/assessments" onClick={() => setIsOpen(false)}>
-              Assessments
-            </Link>
-            <Link to="/progress" onClick={() => setIsOpen(false)}>
-              Progress
-            </Link>
-            <Link to="/communication" onClick={() => setIsOpen(false)}>
-              Communication
-            </Link>
-          </ul>
+          {isAuth && (
+            <ul className="flex flex-col gap-4">
+              <Link to="/" onClick={() => setIsOpen(false)}>
+                Dashboard
+              </Link>
+              <Link to="/courses" onClick={() => setIsOpen(false)}>
+                Courses
+              </Link>
+              <Link to="/users" onClick={() => setIsOpen(false)}>
+                Users
+              </Link>
+              <Link to="/assessments" onClick={() => setIsOpen(false)}>
+                Assessments
+              </Link>
+              <Link to="/progress" onClick={() => setIsOpen(false)}>
+                Progress
+              </Link>
+              <Link to="/communication" onClick={() => setIsOpen(false)}>
+                Communication
+              </Link>
+            </ul>
+          )}
+
           <div className="mt-4 flex flex-col gap-3">
             <button
               // to="/login"
-           onClick={() => { setIsOpen(!isOpen); onLoginClick(); }}
-
+              onClick={() => {
+                setIsOpen(!isOpen);
+                onLoginClick();
+              }}
               className="bg-blue-700 px-3 py-1 rounded text-white text-center"
               // onClick={() => setIsOpen(false)}
             >
@@ -81,7 +85,10 @@ function Navbar({ onLoginClick, onSignUpClick }) {
             </button>
             <button
               // to="/signup"
-              onClick={()=>{onSignUpClick(); setIsOpen(!isOpen)}}
+              onClick={() => {
+                onSignUpClick();
+                setIsOpen(!isOpen);
+              }}
               className="bg-green-600 px-3 py-1 rounded text-white text-center"
               // onClick={() => setIsOpen(false)}
             >
