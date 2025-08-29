@@ -43,3 +43,5 @@ client/dist/
 # Backend build artifacts
 server/build/
 server/dist/
+# .gitignore
+/client/
