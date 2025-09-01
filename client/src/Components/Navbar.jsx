@@ -8,7 +8,10 @@ function Navbar({ onLoginClick, onSignUpClick, isAuth }) {
 
   return (
 
-    <div className=" flex justify-between p-5 items-center   bg-blue-50">
+    <div className=" flex justify-between p-5 items-center   md:px-[40px] bg-blue-50">
+
+
+ 
       {/* Logo */}
       <div>Logo</div>
       {isAuth && (

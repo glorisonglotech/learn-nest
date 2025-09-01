@@ -1,5 +1,5 @@
 
-import React, { useEffect } from "react";
+import React from "react";
 
 function SignUp({ isOpen, onClose,onLoginClick }) {
   //   useEffect(() => {
@@ -10,7 +10,8 @@ function SignUp({ isOpen, onClose,onLoginClick }) {
   //     }
   //   }
   // );
-  // if (!isOpen) return null;
+
+  if (!isOpen) return null;
     const switchToLogin = () => {
     onClose(); // close login modal
     onLoginClick(); // open signup modal

@@ -23,13 +23,16 @@ import LandingPage from "./Pages/LandingPage";
 const App = () => {
   const [isLoginOpen, setIsLoginOpen] = useState(false);
   const [isSignUpOpen, setIsSignUpOpen] = useState(false);
-  const [isAuth, setISauth] = useState(false);
+  const [isAuth, setISauth] = useState(true);
+
+  setISauth(false);
 
   return (
     <Router>
       {isAuth ? (
-        <div className="md:w-[100%] md:mx-auto ">
+        <div>
           <Navbar
+            className="border"
             onLoginClick={() => setIsLoginOpen(true)}
             onSignUpClick={() => setIsSignUpOpen(true)}
             isAuth={isAuth}   {/* ✅ keep from Frontend */}
