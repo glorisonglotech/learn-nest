@@ -35,7 +35,7 @@ const App = () => {
             className="border"
             onLoginClick={() => setIsLoginOpen(true)}
             onSignUpClick={() => setIsSignUpOpen(true)}
-            isAuth={isAuth}   {/* ✅ keep from Frontend */}
+            isAuth={isAuth} 
           />
 
           <Routes>
