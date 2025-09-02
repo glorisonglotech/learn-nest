@@ -17,7 +17,7 @@ import Terms from "./Pages/Sub-pages/Company/Terms";
 import ContactUs from "./Pages/Sub-pages/Supports/ContactUs";
 import Documentation from "./Pages/Sub-pages/Supports/Documentation";
 import HelpCenter from "./Pages/Sub-pages/Supports/HelpCenter";
-import SystemStatus from "./pages/Sub-pages/Supports/SystemStatus";
+import SystemStatus from "./Pages/Sub-pages/Supports/SystemStatus";
 import LandingPage from "./Pages/LandingPage";
 
 const App = () => {
