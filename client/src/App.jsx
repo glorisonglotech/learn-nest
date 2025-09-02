@@ -25,7 +25,6 @@ const App = () => {
   const [isSignUpOpen, setIsSignUpOpen] = useState(false);
   const [isAuth, setISauth] = useState(true);
 
-  setISauth(false);
 
   return (
     <Router>
