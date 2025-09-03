@@ -1,35 +1,61 @@
 import React, { useEffect, useState } from "react";
+import api from "../components/lib/axios";
+import toast, { Toaster } from "react-hot-toast";
 
 function Dashboard() {
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
+  const [category, setCategory] = useState("");
   const [create, setCreate] = useState(false);
-  useEffect(() => {
-    if (create) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "auto";
+
+  const handleCreateCourse = async (e) => {
+    e.preventDefault();
+    try {
+      const res = await api.post("/api/users", {
+        title,
+        description,
+        category,
+      });
+      toast.success("Course created successfully!");
+      setTitle("");
+      setDescription("");
+      setCategory("");
+      setCreate(false); 
+    } catch (error) {
+      toast.error("Failed to create course. Try again.");
+      console.error(error);
     }
-  }, [create]);
-  const onCreate = () => {
-    setCreate((prev) => !prev); // ✅ safer toggle
   };
+
+  useEffect(() => {
+    document.body.style.overflow = create ? "hidden" : "auto";
+  }, [create]);
+
+  const onCreate = () => setCreate((prev) => !prev);
+
   return (
     <main className="p-4">
-      <section className="">
-        <h1 className="">Dashboard</h1>
-        <p>Welcome Back! Here an overview of your courses and activities</p>
-        {/* cards */}
-        <div className=" grid grid-cols-1 md:grid-cols-1 lg:grid-cols- gap-4 mt-3">
-          {/* My course */}
-          <div className=" border flex  justify-between items-center p-4">
-            <h2>My Courses</h2>
-            <div className=" md:w-[20%] bg-blue-600 text-white py-1 rounded-lg hover:bg-blue-500 justify-center items-center flex px-3 ">
-              <button onClick={onCreate}>Create Course</button>
-            </div>
+      <section>
+        <h1 className="text-2xl font-bold">Dashboard</h1>
+        <p className="text-sm text-gray-600">
+          Welcome Back! Here's an overview of your courses and activities
+        </p>
 
-            {/* Create form */}
+        <div className="grid grid-cols-1 gap-4 mt-3">
+       
+          <div className="border flex justify-between items-center p-4">
+            <h2 className="text-lg font-semibold">My Courses</h2>
+            <button
+              onClick={onCreate}
+              className="md:w-[20%] bg-blue-600 text-white py-1 rounded-lg hover:bg-blue-500 px-3"
+            >
+              Create Course
+            </button>
+
+        
             {create && (
               <div
-                className="fixed inset-0 bg-gray-500/25 bg-opacity-50 flex justify-center  items-center z-50"
+                className="fixed inset-0 bg-gray-500/25 flex justify-center items-center z-50"
                 onClick={onCreate}
               >
                 <div
@@ -38,90 +64,99 @@ function Dashboard() {
                 >
                   <h1 className="text-xl font-bold mb-4">Create New Course</h1>
 
-                  <div className="mb-3">
-                    <h2 className="text-sm">Course Title</h2>
-                    <input
-                      type="text"
-                      className="border w-full px-2 py-1 rounded"
-                      placeholder="Enter course title"
-                    />
-                  </div>
+                  <form onSubmit={handleCreateCourse}>
+                    <div className="mb-3">
+                      <label className="text-sm font-medium">Course Title</label>
+                      <input
+                        type="text"
+                        className="border w-full px-2 py-1 rounded"
+                        placeholder="Enter course title"
+                        value={title}
+                        onChange={(e) => setTitle(e.target.value)}
+                        required
+                      />
+                    </div>
 
-                  <div className="mb-3">
-                    <h2 className="text-sm">Course Description</h2>
-                    <input
-                      type="text"
-                      className="border w-full px-2 py-1 rounded"
-                      placeholder="Enter course description"
-                    />
-                  </div>
+                    <div className="mb-3">
+                      <label className="text-sm font-medium">Course Description</label>
+                      <input
+                        type="text"
+                        className="border w-full px-2 py-1 rounded"
+                        placeholder="Enter course description"
+                        value={description}
+                        onChange={(e) => setDescription(e.target.value)}
+                        required
+                      />
+                    </div>
 
-                  <div className="mb-3">
-                    <h2 className="text-sm">Category</h2>
-                    <input
-                      type="text"
-                      className="border w-full px-2 py-1 rounded"
-                      placeholder="Select a category"
-                    />
-                  </div>
+                    <div className="mb-3">
+                      <label className="text-sm font-medium">Category</label>
+                      <input
+                        type="text"
+                        className="border w-full px-2 py-1 rounded"
+                        placeholder="Select a category"
+                        value={category}
+                        onChange={(e) => setCategory(e.target.value)}
+                        required
+                      />
+                    </div>
 
-                  {/* Action buttons */}
-                  <div className="flex justify-end gap-4 mt-4">
-                    <button
-                      className="px-4 py-1 bg-gray-300 rounded hover:bg-gray-400"
-                      onClick={onCreate} // closes modal by toggling
-                    >
-                      Cancel
-                    </button>
-                    <button
-                      className="px-4 py-1 bg-blue-600 text-white rounded hover:bg-blue-700"
-                      onClick={onCreate}
-                    >
-                      Save Course
-                    </button>
-                  </div>
+                    <div className="flex justify-end gap-4 mt-4">
+                      <button
+                        type="button"
+                        className="px-4 py-1 bg-gray-300 rounded hover:bg-gray-400"
+                        onClick={onCreate}
+                      >
+                        Cancel
+                      </button>
+                      <button
+                        type="submit"
+                        className="px-4 py-1 bg-blue-600 text-white rounded hover:bg-blue-700"
+                      >
+                        Save Course
+                      </button>
+                    </div>
+                  </form>
                 </div>
               </div>
             )}
           </div>
-          {/* Enrollment statistics */}
-          <div className=" border p-4">
-            <h2>Enrollment Statistics</h2>
+
+          <div className="border p-4">
+            <h2 className="text-lg font-semibold">Enrollment Statistics</h2>
           </div>
-          {/* Progress overview */}
-          <div className=" border p-4">
-            <h2 className="mb-4">Progress Overview</h2>
+
+          <div className="border p-4">
+            <h2 className="mb-4 text-lg font-semibold">Progress Overview</h2>
             <p>Completed Courses: 5</p>
             <p>In Progress: 3</p>
           </div>
         </div>
-        <div className="grid grid-cols-1 mt-4 md:grid-cols-1 lg:grid-cols-1 gap-4">
-          {/* Recent forum discussion */}
-          <div className=" border p-4">
-            <h2>Recent Forum Discussions</h2>
-            <ul className=" flex  flex-col gap-10 mt-4">
-              <li className="bg-blue-50 p-5">
+
+      
+        <div className="grid grid-cols-1 mt-4 gap-4">
+          <div className="border p-4">
+            <h2 className="text-lg font-semibold">Recent Forum Discussions</h2>
+            <ul className="flex flex-col gap-4 mt-4">
+              <li className="bg-blue-50 p-4 rounded">
                 <div className="flex justify-between">
-                  <h2>AI WorkShop Thoughts</h2>
+                  <h3>AI Workshop Thoughts</h3>
                   <p>15.1</p>
                 </div>
-                <p>Intro to artificial intelliegnce</p>
-                <p>By</p>
+                <p>Intro to artificial intelligence</p>
               </li>
-             
-              <li className="bg-blue-50 p-5">
+              <li className="bg-blue-50 p-4 rounded">
                 <div className="flex justify-between">
-                  <h2>AI WorkShop Thoughts</h2>
+                  <h3>AI Workshop Thoughts</h3>
                   <p>15.2</p>
                 </div>
-                <p>Intro to artificial intelliegnce</p>
-                <p>By</p>
+                <p>Intro to artificial intelligence</p>
               </li>
             </ul>
           </div>
-          {/* Recent Messages */}
-          <div className=" border p-4">
-            <h2>Recent Messages</h2>
+
+          <div className="border p-4">
+            <h2 className="text-lg font-semibold">Recent Messages</h2>
           </div>
         </div>
       </section>

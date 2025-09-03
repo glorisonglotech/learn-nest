@@ -44,4 +44,4 @@ client/dist/
 server/build/
 server/dist/
 # .gitignore
-/client/
+

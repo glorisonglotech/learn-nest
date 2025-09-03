@@ -19,6 +19,7 @@ import Documentation from "./Pages/Sub-pages/Supports/Documentation";
 import HelpCenter from "./Pages/Sub-pages/Supports/HelpCenter";
 import SystemStatus from "./Pages/Sub-pages/Supports/SystemStatus";
 import LandingPage from "./Pages/LandingPage";
+import { Toaster } from 'react-hot-toast';
 
 const App = () => {
   const [isLoginOpen, setIsLoginOpen] = useState(false);
@@ -28,6 +29,16 @@ const App = () => {
 
   return (
     <Router>
+       <Toaster
+        position="top-center"
+        toastOptions={{
+          style: {
+            background: '#000',
+            color: '#fff',
+            border: '1px solid blue', 
+          },
+        }}
+      />
       {isAuth ? (
         <div>
           <Navbar
