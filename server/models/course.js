@@ -7,7 +7,7 @@ const courseSchema = new mongoose.Schema(
     tutor: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "user",
-      required: true,
+      required: false,
     },
     modules: [{ type: mongoose.Schema.Types.ObjectId, ref: "module" }],
   },

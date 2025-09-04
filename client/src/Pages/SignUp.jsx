@@ -1,32 +1,47 @@
+import React, { useState } from "react";
+import api from "../components/lib/axios";
+import toast from "react-hot-toast";
 
-import React from "react";
-
-function SignUp({ isOpen, onClose,onLoginClick }) {
-  //   useEffect(() => {
-  //     if (isOpen) {
-  //       document.body.style.overflow ="hidden"
-  //     }else{
-  //       document.body.style.overflow ="auto"
-  //     }
-  //   }
-  // );
+function SignUp({ isOpen, onClose, onLoginClick }) {
+  const [fullName, setFullName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   if (!isOpen) return null;
-    const switchToLogin = () => {
-    onClose(); // close login modal
-    onLoginClick(); // open signup modal
+
+  const switchToLogin = () => {
+    onClose();
+    onLoginClick();
+  };
+
+  const handleSignUp = async (e) => {
+    e.preventDefault();
+    try {
+      const res = await api.post("/api/auth/signup", {
+        name: fullName,
+        email,
+        password,
+      });
+      toast.success("Account created successfully!");
+      setFullName("");
+      setEmail("");
+      setPassword("");
+      onClose();
+    } catch (error) {
+      toast.error(error.response?.data?.error || "Signup failed");
+      console.error("Signup error:", error);
+    }
   };
 
   return (
     <div
-      className="fixed inset-0  bg-gray-500/25 flex justify-center items-center z-50"
-      onClick={onClose} // click backdrop to close
+      className="fixed inset-0 bg-gray-500/25 flex justify-center items-center z-50"
+      onClick={onClose}
     >
       <div
         className="bg-white p-8 rounded-lg shadow-lg w-[70%] md:w-[40%] relative"
-        onClick={(e) => e.stopPropagation()} // stop closing when clicking inside
+        onClick={(e) => e.stopPropagation()}
       >
-        {/* Close Button */}
         <button
           className="absolute top-3 right-3 text-gray-500 hover:text-gray-700"
           onClick={onClose}
@@ -36,13 +51,15 @@ function SignUp({ isOpen, onClose,onLoginClick }) {
 
         <h2 className="text-2xl font-bold mb-6 text-center">Sign Up</h2>
 
-        <form className="space-y-4">
+        <form className="space-y-4" onSubmit={handleSignUp}>
           <div>
             <label className="block text-gray-700">Full Name</label>
             <input
               type="text"
               placeholder="Your name..."
               className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring focus:border-green-400"
+              value={fullName}
+              onChange={(e) => setFullName(e.target.value)}
               required
             />
           </div>
@@ -53,6 +70,8 @@ function SignUp({ isOpen, onClose,onLoginClick }) {
               type="email"
               placeholder="Your email..."
               className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring focus:border-green-400"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
               required
             />
           </div>
@@ -63,6 +82,8 @@ function SignUp({ isOpen, onClose,onLoginClick }) {
               type="password"
               placeholder="Choose a password..."
               className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring focus:border-green-400"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
               required
             />
           </div>
@@ -89,4 +110,4 @@ function SignUp({ isOpen, onClose,onLoginClick }) {
   );
 }
 
-export default SignUp
+export default SignUp;
