@@ -3,10 +3,10 @@ import api from "../components/lib/axios";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 
-function Login({ isOpen, onClose, onSignUpClick }) {
+function Login({ isOpen, onClose, onSignUpClick, setIsauth }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const navigate = useNavigate(); 
+  const navigate = useNavigate();
 
   if (!isOpen) return null;
 
@@ -22,12 +22,12 @@ function Login({ isOpen, onClose, onSignUpClick }) {
 
       toast.success("Logged in successfully!");
 
-     
       localStorage.setItem("token", res.data.token);
       localStorage.setItem("user", JSON.stringify(res.data.user));
 
       onClose();
-      navigate("/"); 
+      setIsauth(true);
+      navigate("/dashboard");
     } catch (error) {
       toast.error(error.response?.data?.message || "Login failed");
       console.error("Login error:", error);
@@ -77,6 +77,7 @@ function Login({ isOpen, onClose, onSignUpClick }) {
           <button
             type="submit"
             className="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700"
+            onClick={()=>{setIsauth(true)}}
           >
             Log In
           </button>

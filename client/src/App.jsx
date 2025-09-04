@@ -19,66 +19,112 @@ import Documentation from "./Pages/Sub-pages/Supports/Documentation";
 import HelpCenter from "./Pages/Sub-pages/Supports/HelpCenter";
 import SystemStatus from "./Pages/Sub-pages/Supports/SystemStatus";
 import LandingPage from "./Pages/LandingPage";
-import { Toaster } from 'react-hot-toast';
+import { Toaster } from "react-hot-toast";
+import ProtectedRoute from "./Components/ProtectedRoute";
 
 const App = () => {
   const [isLoginOpen, setIsLoginOpen] = useState(false);
   const [isSignUpOpen, setIsSignUpOpen] = useState(false);
   const [isAuth, setISauth] = useState(true);
 
-
   return (
     <Router>
-       <Toaster
+      <Toaster
         position="top-center"
         toastOptions={{
           style: {
-            background: '#000',
-            color: '#fff',
-            border: '1px solid blue', 
+            background: "#000",
+            color: "#fff",
+            border: "1px solid blue",
           },
         }}
       />
-      {isAuth ? (
-        <div>
-          <Navbar
-            className="border"
-            onLoginClick={() => setIsLoginOpen(true)}
-            onSignUpClick={() => setIsSignUpOpen(true)}
-            isAuth={isAuth} 
-          />
 
-          <Routes>
-            <Route path="/" element={<Dashboard />} />
-            <Route path="/Courses" element={<Courses />} />
-            <Route path="/Users" element={<Users />} />
-            <Route path="/Assessments" element={<Assessments />} />
-            <Route path="/Progress" element={<Progress />} />
-            <Route path="/Communication" element={<Communication />} />
-            <Route path="/Login" element={<Login />} />
-            <Route path="/Signup" element={<SignUp />} />
+      {/* Always show Navbar & Footer */}
+      <Navbar
+        onLoginClick={() => setIsLoginOpen(true)}
+        onSignUpClick={() => setIsSignUpOpen(true)}
+        isAuth={isAuth}
+      />
 
-            {/* Sub pages */}
-            <Route path="/aboutUs" element={<AboutUs />} />
-            <Route path="/Blog" element={<Blog />} />
-            <Route path="/Privacy" element={<Privacy />} />
-            <Route path="/terms" element={<Terms />} />
-            <Route path="/ContactUS" element={<ContactUs />} />
-            <Route path="/documentation" element={<Documentation />} />
-            <Route path="/helpcenter" element={<HelpCenter />} />
-            <Route path="systemstatus" element={<SystemStatus />} />
-          </Routes>
-
-          <Footer />
-        </div>
-      ) : (
-        <LandingPage
-          onLoginClick={() => setIsLoginOpen(true)}
-          onSignUpClick={() => setIsSignUpOpen(true)}
+      <Routes>
+        {/* Public routes */}
+        <Route
+          path="/"
+          element={
+            <LandingPage
+              onLoginClick={() => setIsLoginOpen(true)}
+              onSignUpClick={() => setIsSignUpOpen(true)}
+              isAuth={isAuth}
+            />
+          }
         />
-      )}
+        <Route path="/aboutUs" element={<AboutUs />} />
+        <Route path="/blog" element={<Blog />} />
+        <Route path="/privacy" element={<Privacy />} />
+        <Route path="/terms" element={<Terms />} />
+        <Route path="/contactus" element={<ContactUs />} />
+        <Route path="/documentation" element={<Documentation />} />
+        <Route path="/helpcenter" element={<HelpCenter />} />
+        <Route path="/systemstatus" element={<SystemStatus />} />
 
-      {/* 🔹 Render modals globally so they work in both LandingPage & Dashboard */}
+        {/* Protected routes */}
+        <Route
+          path="/dashboard"
+          element={
+            <ProtectedRoute isAuth={isAuth}>
+              <Dashboard />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/courses"
+          element={
+            <ProtectedRoute isAuth={isAuth}>
+              <Courses />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/users"
+          element={
+            <ProtectedRoute isAuth={isAuth}>
+              <Users />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/assessments"
+          element={
+            <ProtectedRoute isAuth={isAuth}>
+              <Assessments />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/progress"
+          element={
+            <ProtectedRoute isAuth={isAuth}>
+              <Progress />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/communication"
+          element={
+            <ProtectedRoute isAuth={isAuth}>
+              <Communication />
+            </ProtectedRoute>
+          }
+        />
+
+        {/* Fallback */}
+        <Route path="*" element={<LandingPage />} />
+      </Routes>
+
+      <Footer />
+
+      {/* 🔹 Render modals */}
       {isLoginOpen && (
         <Login
           isOpen={isLoginOpen}
@@ -87,6 +133,7 @@ const App = () => {
             setIsLoginOpen(false);
             setIsSignUpOpen(true);
           }}
+          setISauth={setISauth}
         />
       )}
 

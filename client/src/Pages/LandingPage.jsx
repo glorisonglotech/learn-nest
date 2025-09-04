@@ -7,7 +7,7 @@ function LandingPage({ onLoginClick, onSignUpClick }) {
   return (
     <div className="flex flex-col min-h-screen">
       {/* Navbar with same props */}
-      <Navbar onLoginClick={onLoginClick} onSignUpClick={onSignUpClick} />
+      {/* <Navbar onLoginClick={onLoginClick} onSignUpClick={onSignUpClick} /> */}
 
       {/* Landing Content */}
       <main className="flex-grow flex flex-col items-center">
@@ -81,7 +81,7 @@ function LandingPage({ onLoginClick, onSignUpClick }) {
 
       {/* Footer */}
 
-      <Footer />
+      {/* <Footer /> */}
     </div>
   );
 }
