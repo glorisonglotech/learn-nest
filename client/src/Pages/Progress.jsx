@@ -1,124 +1,129 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import api from "../components/lib/axios";
+import toast from "react-hot-toast";
 
 function Progress() {
+  const [progress, setProgress] = useState(null);
+
+  useEffect(() => {
+    const fetchProgress = async () => {
+      try {
+        const userId = JSON.parse(localStorage.getItem("user"))?.id;
+        const res = await api.get(`/api/progress/${userId}`);
+        setProgress(res.data);
+      } catch (error) {
+        toast.error("Failed to load progress");
+        console.error("Progress fetch error:", error);
+      }
+    };
+    fetchProgress();
+  }, []);
+
+  if (!progress) {
+    return (
+      <div className="p-6 text-center text-gray-500">
+        Loading progress...
+      </div>
+    );
+  }
+
   return (
     <section className="p-6">
-      <div  className="flex justify-between items-center mb-6">
+      <div className="flex justify-between items-center mb-6">
         <h1>My Learning Progress</h1>
-        {/* drop down */}
-        <button></button>
-        {/* Export button  */}
+        <button className="bg-blue-600 text-white px-4 py-2 rounded-lg">Export</button>
       </div>
 
       <div className="flex flex-col gap-10 border p-4">
-        <div>
-          <h2 className="text-2xl">Overall progress</h2>
-        </div>
+        <h2 className="text-2xl">Overall progress</h2>
         <div className="flex flex-col justify-center items-center gap-5">
-          <div className="flex flex-col justify-center items-center">
-            <p className=" bg-blue-500 rounded-full w-[100px] h-[100px] justify-center flex items-center">
-              %
-            </p>
-            <p>Overall Completion</p>
-          </div>
-
-          <div className="flex flex-col justify-center items-center">
-            <p className="bg-green-500 rounded-full w-[80px] h-[80px] justify-center flex items-center">
-              %
-            </p>
-            <p>Courses Completed</p>
-          </div>
-
-          <div className="flex flex-col justify-center items-center">
-            <p className="bg-orange-500 rounded-full w-[70px] h-[70px] justify-center flex items-center">
-              %
-            </p>
-            <p>Active Course</p>
-          </div>
-
-          <div className="flex flex-col justify-center items-center">
-            <p className="bg-gray-500 rounded-full w-[60px] h-[60px] justify-center flex items-center">
-              %
-            </p>
-            <p>Average Grade</p>
-          </div>
+          <ProgressCircle value={progress.overallCompletion} label="Overall Completion" color="bg-blue-500" size="100px" />
+          <ProgressCircle value={progress.coursesCompleted} label="Courses Completed" color="bg-green-500" size="80px" />
+          <ProgressCircle value={progress.activeCourses} label="Active Course" color="bg-orange-500" size="70px" />
+          <ProgressCircle value={progress.averageGrade} label="Average Grade" color="bg-gray-500" size="60px" />
         </div>
       </div>
 
-      {/* course progress */}
       <div className="border my-10 p-4">
         <h2>Course Progress</h2>
-        <div className=" flex flex-col gap-10 ">
-          <div className="flex justify-between items-center ">
-            <div></div>
-            <div className="bg-green-500 px-7 rounded-2xl">0% completed</div>
-          </div>
-          <dix>
-            {" "}
-            <div className="flex justify-between mb-4">
-              <p>progress</p>
-              <p>0 of 0 lesson </p>
-            </div>
-            <div className="bar">
-              <div className="w-full bg-gray-500 rounded-2xl">
-                <div className="w-[80%] rounded-2xl bg-blue-500 p-1"></div>
+        {progress.courseProgress.map((course, index) => (
+          <div key={index} className="flex flex-col gap-6 mt-4">
+            <div className="flex justify-between items-center">
+              <h3 className="font-semibold">{course.courseTitle}</h3>
+              <div className="bg-green-500 px-4 py-1 rounded-2xl text-white">
+                {course.completedPercent}% completed
               </div>
             </div>
-          </dix>
-
-          <div className="flex justify-between items-center ">
             <div>
-              <p>last activity</p>
-              <p>date 8/21/2025 9:47</p>
+              <div className="flex justify-between mb-2 text-sm text-gray-600">
+                <p>Progress</p>
+                <p>{course.lessonsCompleted} of {course.totalLessons} lessons</p>
+              </div>
+              <div className="w-full bg-gray-300 rounded-2xl h-4">
+                <div
+                  className="bg-blue-500 h-4 rounded-2xl"
+                  style={{ width: `${course.completedPercent}%` }}
+                ></div>
+              </div>
             </div>
-            <div>--</div>
+            <div className="flex justify-between text-sm text-gray-500">
+              <p>Last activity</p>
+              <p>{new Date(course.lastActivity).toLocaleString()}</p>
+            </div>
           </div>
-        </div>
+        ))}
       </div>
 
-      {/* Recent achivemenst  */}
       <div className="border p-4">
         <h2>Recent Achievements</h2>
-        <div className="bg-green-600 p-2 rounded-2xl">✔</div>
+        <ul className="list-disc ml-6 mt-2 text-green-600">
+          {progress.recentAchievements.map((achieve, i) => (
+            <li key={i}>{achieve}</li>
+          ))}
+        </ul>
       </div>
 
-      {/* Assements grades  */}
-      <div className=" my-10 border p-4">
-        <p>Assesments Grades</p>
-        <div className=" flex justify-between">
-          <div></div>
-
-          <div className="flex gap-5">
-            <p>%</p>
-            <p>0</p>
-          </div>
+      <div className="my-10 border p-4">
+        <h2>Assessment Grades</h2>
+        <div className="flex justify-between text-lg font-medium">
+          <p>Grade</p>
+          <p>{progress.assessmentGrade}%</p>
         </div>
       </div>
 
-      {/*Upcoming DEadlines
-       */}
-      <div className=" border p-4">
-        <p>Upcoming Dealines</p>
+      <div className="border p-4">
+        <h2>Upcoming Deadlines</h2>
+        <p className="text-gray-500">Coming soon...</p>
       </div>
-      {/* study Time */}
+
       <div className="border my-10 p-4">
-        <p>Study Times</p>
-        <div className="mt-4">
+        <h2>Study Time</h2>
+        <div className="mt-4 space-y-2">
           <div className="flex justify-between">
-            <p>This weeks</p>
-            <p>0 hours</p>
+            <p>This week</p>
+            <p>{progress.studyTime.weekly} hours</p>
           </div>
           <div className="flex justify-between">
-            <p>This months</p>
-            <p>0 hours</p>
-          </div>
-          <div className="flex justify-between">
-            <p>This weeks</p>
-            <p>0 hours</p>
+            <p>This month</p>
+            <p>{progress.studyTime.monthly} hours</p>
           </div>
         </div>
       </div>
     </section>
+  );
+}
+
+function ProgressCircle({ value, label, color, size }) {
+  return (
+    <div className="flex flex-col justify-center items-center">
+      <div
+        className={`${color} rounded-full flex items-center justify-center text-white font-bold`}
+        style={{ width: size, height: size }}
+      >
+        {value}%
+      </div>
+      <p className="mt-2 text-sm text-gray-700">{label}</p>
+    </div>
   );
 }
 
