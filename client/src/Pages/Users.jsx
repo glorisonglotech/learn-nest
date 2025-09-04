@@ -13,7 +13,7 @@ function UserSearchForm({ onSearch }) {
   };
 
   return (
-    <div className="p-4 rounded-lg w-full border mb-6">
+    <section className="p-4 rounded-lg w-full border mb-6">
       <label className="block font-medium mb-1">Search Users</label>
       <input
         type="text"
@@ -42,7 +42,7 @@ function UserSearchForm({ onSearch }) {
         <FontAwesomeIcon icon={faSearch} />
         Search
       </button>
-    </div>
+    </section>
   );
 }
 
@@ -72,20 +72,20 @@ export default function Users() {
   }, []);
 
   return (
-    <div className="p-4">
+    <main className="p-4">
       {/* Header */}
-      <div className="md:flex justify-between items-center mb-6">
-        <div>
+      <header className="md:flex justify-between items-center mb-6">
+        <section>
           <h1 className="text-3xl font-bold mb-1">User Management</h1>
           <p className="text-gray-600">
             Manage user accounts, roles, and permissions for your learning platform.
           </p>
-        </div>
+        </section>
         <button className="bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-lg flex items-center gap-2 mt-5">
           <FontAwesomeIcon icon={faPlus} />
           Add New User
         </button>
-      </div>
+      </header>
 
       {/* Search Form */}
       <UserSearchForm onSearch={fetchUsers} />
@@ -96,7 +96,7 @@ export default function Users() {
       ) : users.length === 0 ? (
         <p className="text-gray-500 text-center mt-10">No users found.</p>
       ) : (
-        <div className="mt-8">
+        <section className="mt-8">
           <h2 className="text-xl font-semibold mb-4">Users List</h2>
           <div className="overflow-x-auto">
             <table className="min-w-full bg-white border rounded-lg shadow-sm">
@@ -120,8 +120,8 @@ export default function Users() {
               </tbody>
             </table>
           </div>
-        </div>
+        </section>
       )}
-    </div>
+    </main>
   );
 }
