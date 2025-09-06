@@ -34,25 +34,28 @@ function SignUp({ isOpen, onClose, onLoginClick }) {
   };
 
   return (
-    <div
+    <main
       className="fixed inset-0 bg-gray-500/25 flex justify-center items-center z-50"
       onClick={onClose}
     >
-      <div
+      <section
         className="bg-white p-8 rounded-lg shadow-lg w-[70%] md:w-[40%] relative"
         onClick={(e) => e.stopPropagation()}
       >
         <button
           className="absolute top-3 right-3 text-gray-500 hover:text-gray-700"
           onClick={onClose}
+          aria-label="Close sign up form"
         >
           ✕
         </button>
 
-        <h2 className="text-2xl font-bold mb-6 text-center">Sign Up</h2>
+        <header>
+          <h2 className="text-2xl font-bold mb-6 text-center">Sign Up</h2>
+        </header>
 
         <form className="space-y-4" onSubmit={handleSignUp}>
-          <div>
+          <fieldset>
             <label className="block text-gray-700">Full Name</label>
             <input
               type="text"
@@ -62,9 +65,9 @@ function SignUp({ isOpen, onClose, onLoginClick }) {
               onChange={(e) => setFullName(e.target.value)}
               required
             />
-          </div>
+          </fieldset>
 
-          <div>
+          <fieldset>
             <label className="block text-gray-700">Email</label>
             <input
               type="email"
@@ -74,9 +77,9 @@ function SignUp({ isOpen, onClose, onLoginClick }) {
               onChange={(e) => setEmail(e.target.value)}
               required
             />
-          </div>
+          </fieldset>
 
-          <div>
+          <fieldset>
             <label className="block text-gray-700">Password</label>
             <input
               type="password"
@@ -86,7 +89,7 @@ function SignUp({ isOpen, onClose, onLoginClick }) {
               onChange={(e) => setPassword(e.target.value)}
               required
             />
-          </div>
+          </fieldset>
 
           <button
             type="submit"
@@ -96,17 +99,19 @@ function SignUp({ isOpen, onClose, onLoginClick }) {
           </button>
         </form>
 
-        <p className="mt-4 text-sm text-center">
-          Already have an account?{" "}
-          <span
-            className="text-blue-600 hover:underline cursor-pointer"
-            onClick={switchToLogin}
-          >
-            Log in
-          </span>
-        </p>
-      </div>
-    </div>
+        <footer>
+          <p className="mt-4 text-sm text-center">
+            Already have an account?{" "}
+            <span
+              className="text-blue-600 hover:underline cursor-pointer"
+              onClick={switchToLogin}
+            >
+              Log in
+            </span>
+          </p>
+        </footer>
+      </section>
+    </main>
   );
 }
 

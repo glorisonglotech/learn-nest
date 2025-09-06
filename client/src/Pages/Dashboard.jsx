@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import api from "../components/lib/axios";
-import toast, { Toaster } from "react-hot-toast";
+import toast from "react-hot-toast";
 
 function Dashboard() {
   const [title, setTitle] = useState("");
@@ -20,7 +20,7 @@ function Dashboard() {
       setTitle("");
       setDescription("");
       setCategory("");
-      setCreate(false); 
+      setCreate(false);
     } catch (error) {
       toast.error("Failed to create course. Try again.");
       console.error(error);
@@ -36,14 +36,16 @@ function Dashboard() {
   return (
     <main className="p-4">
       <section>
-        <h1 className="text-2xl font-bold">Dashboard</h1>
-        <p className="text-sm text-gray-600">
-          Welcome Back! Here's an overview of your courses and activities
-        </p>
+        <header>
+          <h1 className="text-2xl font-bold">Dashboard</h1>
+          <p className="text-sm text-gray-600">
+            Welcome Back! Here's an overview of your courses and activities
+          </p>
+        </header>
 
-        <div className="grid grid-cols-1 gap-4 mt-3">
-       
-          <div className="border flex justify-between items-center p-4">
+        {/* Course Management */}
+        <section className="grid grid-cols-1 gap-4 mt-3">
+          <article className="border flex justify-between items-center p-4">
             <h2 className="text-lg font-semibold">My Courses</h2>
             <button
               onClick={onCreate}
@@ -52,20 +54,20 @@ function Dashboard() {
               Create Course
             </button>
 
-        
             {create && (
               <div
                 className="fixed inset-0 bg-gray-500/25 flex justify-center items-center z-50"
                 onClick={onCreate}
               >
-                <div
+                <dialog
+                  open
                   className="bg-white p-6 rounded-lg md:w-[50%] shadow-lg"
                   onClick={(e) => e.stopPropagation()}
                 >
                   <h1 className="text-xl font-bold mb-4">Create New Course</h1>
 
                   <form onSubmit={handleCreateCourse}>
-                    <div className="mb-3">
+                    <fieldset className="mb-3">
                       <label className="text-sm font-medium">Course Title</label>
                       <input
                         type="text"
@@ -75,9 +77,9 @@ function Dashboard() {
                         onChange={(e) => setTitle(e.target.value)}
                         required
                       />
-                    </div>
+                    </fieldset>
 
-                    <div className="mb-3">
+                    <fieldset className="mb-3">
                       <label className="text-sm font-medium">Course Description</label>
                       <input
                         type="text"
@@ -87,9 +89,9 @@ function Dashboard() {
                         onChange={(e) => setDescription(e.target.value)}
                         required
                       />
-                    </div>
+                    </fieldset>
 
-                    <div className="mb-3">
+                    <fieldset className="mb-3">
                       <label className="text-sm font-medium">Category</label>
                       <input
                         type="text"
@@ -99,9 +101,9 @@ function Dashboard() {
                         onChange={(e) => setCategory(e.target.value)}
                         required
                       />
-                    </div>
+                    </fieldset>
 
-                    <div className="flex justify-end gap-4 mt-4">
+                    <footer className="flex justify-end gap-4 mt-4">
                       <button
                         type="button"
                         className="px-4 py-1 bg-gray-300 rounded hover:bg-gray-400"
@@ -115,50 +117,50 @@ function Dashboard() {
                       >
                         Save Course
                       </button>
-                    </div>
+                    </footer>
                   </form>
-                </div>
+                </dialog>
               </div>
             )}
-          </div>
+          </article>
 
-          <div className="border p-4">
+          <article className="border p-4">
             <h2 className="text-lg font-semibold">Enrollment Statistics</h2>
-          </div>
+          </article>
 
-          <div className="border p-4">
+          <article className="border p-4">
             <h2 className="mb-4 text-lg font-semibold">Progress Overview</h2>
             <p>Completed Courses: 5</p>
             <p>In Progress: 3</p>
-          </div>
-        </div>
+          </article>
+        </section>
 
-      
-        <div className="grid grid-cols-1 mt-4 gap-4">
-          <div className="border p-4">
+        {/* Discussions & Messages */}
+        <section className="grid grid-cols-1 mt-4 gap-4">
+          <article className="border p-4">
             <h2 className="text-lg font-semibold">Recent Forum Discussions</h2>
             <ul className="flex flex-col gap-4 mt-4">
               <li className="bg-blue-50 p-4 rounded">
-                <div className="flex justify-between">
+                <header className="flex justify-between">
                   <h3>AI Workshop Thoughts</h3>
-                  <p>15.1</p>
-                </div>
+                  <time>15.1</time>
+                </header>
                 <p>Intro to artificial intelligence</p>
               </li>
               <li className="bg-blue-50 p-4 rounded">
-                <div className="flex justify-between">
+                <header className="flex justify-between">
                   <h3>AI Workshop Thoughts</h3>
-                  <p>15.2</p>
-                </div>
+                  <time>15.2</time>
+                </header>
                 <p>Intro to artificial intelligence</p>
               </li>
             </ul>
-          </div>
+          </article>
 
-          <div className="border p-4">
+          <aside className="border p-4">
             <h2 className="text-lg font-semibold">Recent Messages</h2>
-          </div>
-        </div>
+          </aside>
+        </section>
       </section>
     </main>
   );

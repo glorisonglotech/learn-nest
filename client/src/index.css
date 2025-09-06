@@ -5,8 +5,8 @@
     .border{
         @apply md:border border-blue-400/70 rounded-md;
     }
-    h1{
-        @apply font-bold text-3xl
+  h1 {
+    @apply font-bold text-3xl;
     }
     h2{
         @apply font-bold
