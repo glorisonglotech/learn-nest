@@ -11,7 +11,7 @@ function Navbar({ onLoginClick, onSignUpClick, isAuth }) {
     <div className=" flex justify-between p-5 items-center   md:px-[40px] bg-blue-50">
  
       {/* Logo */}
-      <div>Logo</div>
+      <div className="font-inter font-bold">Logo</div>
       
       {isAuth && (
         <ul className=" md:flex gap-5 hidden items-center">
@@ -54,7 +54,7 @@ function Navbar({ onLoginClick, onSignUpClick, isAuth }) {
         <div className="absolute top-16 left-0 w-full bg-white shadow-lg md:hidden p-4">
           {isAuth && (
             <ul className="flex flex-col gap-4">
-              <Link to="/" onClick={() => setIsOpen(false)}>
+              <Link to="/dashboard" onClick={() => setIsOpen(false)}>
                 Dashboard
               </Link>
               <Link to="/courses" onClick={() => setIsOpen(false)}>

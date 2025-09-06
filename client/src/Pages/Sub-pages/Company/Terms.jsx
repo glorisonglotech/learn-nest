@@ -2,7 +2,7 @@ import React from 'react'
 
 function Terms() {
   return (
-    <div>Terms</div>
+    <main>Terms</main>
   )
 }
 

@@ -57,6 +57,7 @@ function Dashboard() {
             {create && (
               <div
                 className="fixed inset-0 bg-gray-500/25 flex justify-center items-center z-50"
+                
                 onClick={onCreate}
               >
                 <dialog

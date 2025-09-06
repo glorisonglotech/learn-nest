@@ -2,7 +2,7 @@ import React from 'react'
 
 function SystemStatus() {
   return (
-    <div>SystemStatus</div>
+    <main>SystemStatus</main>
   )
 }
 

@@ -1,3 +1,4 @@
+// tailwind.config.js
 /** @type {import('tailwindcss').Config} */
 export default {
   content: [
@@ -7,7 +8,7 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        poppins: ["Poppins", "sans-serif"], // 👈 defines font-poppins
+        sans: ["Inter", "sans-serif"], // 👈 overrides default sans
       },
     },
   },
