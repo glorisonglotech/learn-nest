@@ -1,14 +1,23 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap");
 @import "tailwindcss";
 
-
 @layer compoonents {
-    .border{
-        @apply md:border border-blue-400/70 rounded-md;
-    }
+  .font-inter {
+    font-family: "Inter", sans-serif;
+  }
+  .border {
+    @apply md:border border-blue-400/70 rounded-md;
+  }
   h1 {
     @apply font-bold text-3xl;
-    }
-    h2{
-        @apply font-bold
-    }
+  }
+  h2 {
+    @apply font-bold;
+  }
 }
+@layer base {
+  body {
+    @apply font-sans; 
+  }
+}
+

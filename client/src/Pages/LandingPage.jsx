@@ -6,10 +6,8 @@ import Footer from "../Components/Footer";
 function LandingPage({ onLoginClick, onSignUpClick }) {
   return (
     <div className="flex flex-col min-h-screen">
-      {/* Navbar with same props */}
-      {/* <Navbar onLoginClick={onLoginClick} onSignUpClick={onSignUpClick} /> */}
-
-      {/* Landing Content */}
+     
+  
       <main className="flex-grow flex flex-col items-center">
         {/* Hero Section */}
         <section className="w-full bg-gradient-to-r from-blue-600 to-indigo-700 text-white py-20 px-6 text-center">
@@ -67,7 +65,7 @@ function LandingPage({ onLoginClick, onSignUpClick }) {
         {/* CTA Section */}
         <section className="w-full bg-blue-600 text-white py-16 text-center">
           <h2 className="text-3xl font-bold mb-4">Start Your Journey Today</h2>
-          <p className="mb-8 text-lg">
+          <p className="mb-8 text-lg px-4">
             Join thousands of learners growing with Learn Nest.
           </p>
           <button

@@ -2,7 +2,7 @@ import React from 'react'
 
 function Documentation() {
   return (
-    <div>Documentation</div>
+    <main>Documentation</main>
   )
 }
 
